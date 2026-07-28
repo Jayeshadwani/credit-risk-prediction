@@ -1,0 +1,60 @@
+{
+  "demo_case_id": "DEMO-005",
+  "model_output": {
+    "default_probability": 0.5042787790298462,
+    "non_default_probability": 0.4957212209701538,
+    "risk_category": "medium",
+    "model_version": "1.1.0"
+  },
+  "top_risk_factors": [
+    {
+      "feature": "EXT_SOURCE_MEAN",
+      "display_name": "Ext Source Mean",
+      "raw_value": 0.3892054558,
+      "model_value": 0.3892054558,
+      "shap_value": 0.34314191341400146,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "CREDIT_GOODS_RATIO",
+      "display_name": "Credit Goods Ratio",
+      "raw_value": 1.2111999989,
+      "model_value": 1.2111999989,
+      "shap_value": 0.12730444967746735,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "CREDIT_ANNUITY_RATIO",
+      "display_name": "Credit Annuity Ratio",
+      "raw_value": 21.3427314758,
+      "model_value": 21.3427314758,
+      "shap_value": 0.11804796755313873,
+      "impact": "increases_default_risk"
+    }
+  ],
+  "top_protective_factors": [
+    {
+      "feature": "BUREAU_BUREAU_DEBT_CREDIT_RATIO_MAX",
+      "display_name": "Bureau Bureau Debt Credit Ratio Max",
+      "raw_value": 0.5430709124,
+      "model_value": 0.5430709124,
+      "shap_value": -0.15995268523693085,
+      "impact": "reduces_default_risk"
+    },
+    {
+      "feature": "PREV_PRODUCT_COMBINATION_CASH X-SELL: LOW_MEAN",
+      "display_name": "Prev Product Combination Cash X-Sell: Low Mean",
+      "raw_value": 0.3333333433,
+      "model_value": 0.3333333433,
+      "shap_value": -0.09902745485305786,
+      "impact": "reduces_default_risk"
+    }
+  ],
+  "explanation_metadata": {
+    "method": "SHAP",
+    "shap_output_scale": "raw_model_output",
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

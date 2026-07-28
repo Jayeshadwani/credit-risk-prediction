@@ -1,0 +1,60 @@
+{
+  "demo_case_id": "DEMO-002",
+  "model_output": {
+    "default_probability": 0.07816924154758453,
+    "non_default_probability": 0.9218307584524155,
+    "risk_category": "low",
+    "model_version": "1.1.0"
+  },
+  "top_risk_factors": [
+    {
+      "feature": "CREDIT_GOODS_RATIO",
+      "display_name": "Credit Goods Ratio",
+      "raw_value": 1.2640000582,
+      "model_value": 1.2640000582,
+      "shap_value": 0.0729297325015068,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "PREV_PREV_APPLICATION_CREDIT_RATIO_MEAN",
+      "display_name": "Prev Prev Application Credit Ratio Mean",
+      "raw_value": 0.7758592367,
+      "model_value": 0.7758592367,
+      "shap_value": 0.04406086355447769,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "NAME_EDUCATION_TYPE",
+      "display_name": "Name Education Type",
+      "raw_value": "Secondary / secondary special",
+      "model_value": 4.0,
+      "shap_value": 0.04381653666496277,
+      "impact": "increases_default_risk"
+    }
+  ],
+  "top_protective_factors": [
+    {
+      "feature": "EXT_SOURCE_MEAN",
+      "display_name": "Ext Source Mean",
+      "raw_value": 0.6265926957,
+      "model_value": 0.6265926957,
+      "shap_value": -0.5962837934494019,
+      "impact": "reduces_default_risk"
+    },
+    {
+      "feature": "CC_CC_BALANCE_LIMIT_RATIO_MAX",
+      "display_name": "Cc Cc Balance Limit Ratio Max",
+      "raw_value": 0.0,
+      "model_value": 0.0,
+      "shap_value": -0.20345579087734222,
+      "impact": "reduces_default_risk"
+    }
+  ],
+  "explanation_metadata": {
+    "method": "SHAP",
+    "shap_output_scale": "raw_model_output",
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

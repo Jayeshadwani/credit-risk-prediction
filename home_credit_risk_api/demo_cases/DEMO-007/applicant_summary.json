@@ -1,0 +1,41 @@
+{
+  "demo_case_id": "DEMO-007",
+  "application": {
+    "contract_type": "Cash loans",
+    "credit_amount": 540000.0,
+    "loan_annuity": 33165.0,
+    "goods_price": 540000.0
+  },
+  "financial_profile": {
+    "total_income": 135000.0,
+    "income_type": "Pensioner",
+    "credit_income_ratio": 4.0,
+    "annuity_income_ratio": 0.246
+  },
+  "employment_profile": {
+    "occupation_type": "Laborers",
+    "organization_type": "XNA",
+    "employment_years": 4.5
+  },
+  "household_profile": {
+    "family_status": "Widow",
+    "housing_type": "House / apartment",
+    "children_count": 0.0,
+    "family_members": 1.0
+  },
+  "credit_indicators": {
+    "external_score_1": 0.50544554,
+    "external_score_2": 0.6707981825,
+    "external_score_3": 0.6413682699
+  },
+  "model_output": {
+    "default_probability": 0.4403323233127594,
+    "risk_category": "medium"
+  },
+  "metadata": {
+    "age_years": 57.3,
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "image": "058264079379.dkr.ecr.ap-south-1.amazonaws.com/loan-underwriting-ai-assistant:1.0.0",
+  "containerPort": 8000,
+  "secrets": [
+    {
+      "name": "OPENAI_API_KEY",
+      "valueFrom": "arn:aws:secretsmanager:ap-south-1:058264079379:secret:loan-underwriting-ai-assistant/openai-api-key-8ufDoi"
+    }
+  ]
+}

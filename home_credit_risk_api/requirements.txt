@@ -1,0 +1,30 @@
+# -------------------------
+# API and validation
+# -------------------------
+fastapi==0.139.2
+uvicorn[standard]==0.51.0
+pydantic==2.13.4
+
+# -------------------------
+# OpenAI and configuration
+# -------------------------
+openai==2.47.0
+python-dotenv==1.2.2
+
+# -------------------------
+# ML inference
+# Keep aligned with the
+# saved joblib model bundle
+# -------------------------
+numpy==2.0.1
+pandas==2.3.3
+scikit-learn==1.6.1
+xgboost==2.1.4
+shap==0.51.0
+joblib==1.5.3
+
+# -------------------------
+# RAG retrieval
+# -------------------------
+chromadb==1.5.9
+sentence-transformers==5.6.0

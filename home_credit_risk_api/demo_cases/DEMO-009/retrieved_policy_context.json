@@ -1,0 +1,170 @@
+{
+  "demo_case_id": "DEMO-009",
+  "generated_queries": [
+    {
+      "query_id": "risk-band",
+      "reason": "Applicant is classified as low risk.",
+      "query": "What decision, approval, or manual-review requirements apply to a low-risk loan applicant?"
+    },
+    {
+      "query_id": "risk-factor-1",
+      "reason": "Registration age increased the model's predicted default risk.",
+      "query": "What underwriting, eligibility, affordability, or manual-review policy is relevant when Registration age is identified as an adverse model risk factor?"
+    },
+    {
+      "query_id": "risk-factor-2",
+      "reason": "Prev Name Contract Status Refused Mean increased the model's predicted default risk.",
+      "query": "What underwriting, eligibility, affordability, or manual-review policy is relevant when Prev Name Contract Status Refused Mean is identified as an adverse model risk factor?"
+    },
+    {
+      "query_id": "protective-factor-1",
+      "reason": "Ext Source Mean reduced the model's predicted default risk.",
+      "query": "What creditworthiness or credit-bureau conditions support continuing a loan application when the applicant has an acceptable external credit profile?"
+    },
+    {
+      "query_id": "protective-factor-2",
+      "reason": "Bureau Credit Type Mortgage Mean reduced the model's predicted default risk.",
+      "query": "What underwriting policy considerations may support continuing an application when Bureau Credit Type Mortgage Mean reduces the model's predicted default risk?"
+    }
+  ],
+  "retrieval_configuration": {
+    "top_k_per_query": 3,
+    "candidate_k": 8,
+    "maximum_final_chunks": 4,
+    "policy_types": [
+      "source_derived",
+      "synthetic_demo"
+    ]
+  },
+  "retrieved_policy_chunks": [
+    {
+      "chunk_id": "loan-policy-v1.0-section-18-chunk-001",
+      "text": "18. Decision Outcomes and Manual-Review Triggers\n\nRecommendation Minimum conditions\nEligible for straight-through processing Low model risk; no hard decline or manual-review trigger;\nRecommendation Minimum conditions\ndocuments complete; affordability within standard limits.\nConditional approval Low or medium risk with a remediable condition such as reduced\namount, additional proof or guarantor.\nManual review Any medium/high model band, thin file, borderline affordability,\nincome discrepancy, recent enquiry spike, missing non-critical\ndocument or conflicting data.\nDecline At least one hard decline condition in Section 19.\n18.1 Mandatory manual-review triggers include:\n-Medium or high model-risk band.\n-FOIR above 40% and up to 50%, or credit-to-income ratio above 3.0x and up to 5.0x.\n-Bureau score below 700 but not subject to a hard decline.\n-No bureau score or limited credit history.\n-Declared-versus-observed income discrepancy of 10%-25%.\n-Income volatility above 30% across the available observation period.\n-Requested amount within 10% of a product or exposure cap.\n-Student applicant or any application requiring a guarantor.\n-Conflicting KYC, employment, account-ownership or repayment information that can potentially be resolved.",
+      "metadata": {
+        "chunk_size": 1249,
+        "policy_type": "synthetic_demo",
+        "document_name": "Loan Underwriting Policy - RAG Demo Edition",
+        "chunk_index": 1,
+        "document_version": "1.0",
+        "section_number": "18",
+        "page_start": 6,
+        "source_file": "Loan_Underwriting_Policy_RAG_Demo_Edition.pdf",
+        "section_title": "Decision Outcomes and Manual-Review Triggers",
+        "page_end": 7
+      },
+      "matched_queries": [
+        {
+          "query_id": "risk-band",
+          "reason": "Applicant is classified as low risk.",
+          "rank": 1
+        },
+        {
+          "query_id": "risk-factor-1",
+          "reason": "Registration age increased the model's predicted default risk.",
+          "rank": 1
+        },
+        {
+          "query_id": "risk-factor-2",
+          "reason": "Prev Name Contract Status Refused Mean increased the model's predicted default risk.",
+          "rank": 2
+        },
+        {
+          "query_id": "protective-factor-2",
+          "reason": "Bureau Credit Type Mortgage Mean reduced the model's predicted default risk.",
+          "rank": 1
+        }
+      ],
+      "fusion_score": 3.5,
+      "best_reranker_score": 3.8448281288146973,
+      "best_vector_distance": 0.39867615699768066
+    },
+    {
+      "chunk_id": "loan-policy-v1.0-section-14-chunk-001",
+      "text": "14. Customer Eligibility and Income Verification\n\nCustomer type Demo eligibility rule Default route\nSalaried applicant Age 21-60 at loan maturity; at least 6 Standard or manual review\nmonths with current employer or 12 months\ncumulative employment; verifiable net\nmonthly income of at least INR 15,000.\nSelf-employed applicant Age 21-65 at loan maturity; at least 24 Standard or manual review\nmonths in business; verifiable business\nincome and banking activity.\nStudent applicant Age 18 or older; recognized Manual review mandatory\ncourse/institution; guarantor or co-borrower\nwith verifiable income.\nThin-file / no bureau history No adverse fraud or identity signal; income Manual review\nand bank evidence must be available.\n-Unsecured credit requires verifiable regular income, except a student case supported by an acceptable guarantor,\nconsistent with the source policy principle.\n-Income should be supported by documents and, where available, matched against bank credits and employer or\nbusiness evidence.\n-A declared-versus-observed income discrepancy above 10% requires manual review; above 25% without a\nreasonable explanation results in decline.",
+      "metadata": {
+        "policy_type": "synthetic_demo",
+        "chunk_index": 1,
+        "section_number": "14",
+        "chunk_size": 1155,
+        "section_title": "Customer Eligibility and Income Verification",
+        "source_file": "Loan_Underwriting_Policy_RAG_Demo_Edition.pdf",
+        "document_name": "Loan Underwriting Policy - RAG Demo Edition",
+        "page_start": 5,
+        "page_end": 5,
+        "document_version": "1.0"
+      },
+      "matched_queries": [
+        {
+          "query_id": "risk-band",
+          "reason": "Applicant is classified as low risk.",
+          "rank": 2
+        },
+        {
+          "query_id": "risk-factor-1",
+          "reason": "Registration age increased the model's predicted default risk.",
+          "rank": 2
+        },
+        {
+          "query_id": "protective-factor-1",
+          "reason": "Ext Source Mean reduced the model's predicted default risk.",
+          "rank": 3
+        }
+      ],
+      "fusion_score": 1.3333333333333333,
+      "best_reranker_score": -2.0264594554901123,
+      "best_vector_distance": 0.41205787658691406
+    },
+    {
+      "chunk_id": "loan-policy-v1.0-section-13-chunk-001",
+      "text": "13. Policy Status, Definitions and Decision Hierarchy\n\n13.1 Status. The rules in Part II are a non-production demo layer. They operationalize the principles in Part I\nbut do not represent RRFL, RBI or industry-approved thresholds.\n13.2 Decision hierarchy. When multiple rules apply, the system should use the following precedence:\n1. Consent, KYC, fraud and legal restrictions.\n2. Hard affordability and repayment-history rules.\n3. Product eligibility and exposure limits.\n4. Model risk ranking and SHAP explanation.\n5. Human underwriter review and final sanction.\n13.3 Decision labels. The system may recommend only: Eligible for straight-through processing, Conditional\napproval, Manual review, or Decline. Final sanction remains a human or authorized-credit-function decision.",
+      "metadata": {
+        "page_end": 5,
+        "document_name": "Loan Underwriting Policy - RAG Demo Edition",
+        "policy_type": "synthetic_demo",
+        "source_file": "Loan_Underwriting_Policy_RAG_Demo_Edition.pdf",
+        "section_title": "Policy Status, Definitions and Decision Hierarchy",
+        "page_start": 5,
+        "document_version": "1.0",
+        "chunk_size": 779,
+        "chunk_index": 1,
+        "section_number": "13"
+      },
+      "matched_queries": [
+        {
+          "query_id": "risk-factor-2",
+          "reason": "Prev Name Contract Status Refused Mean increased the model's predicted default risk.",
+          "rank": 1
+        }
+      ],
+      "fusion_score": 1.0,
+      "best_reranker_score": -1.0822303295135498,
+      "best_vector_distance": 0.5731349587440491
+    },
+    {
+      "chunk_id": "loan-policy-v1.0-section-16-chunk-001",
+      "text": "16. Credit Bureau and Repayment-History Rules\n\nCondition Interpretation Action\nBureau score >= 700 Acceptable bureau profile Continue\nBureau score 650-699 Borderline profile Manual review\nBureau score 600-649 Weak profile Manual review only with strong mitigants\nBureau score < 600 Outside demo risk appetite Decline unless score is unavailable due to a\nverified thin file\nNo bureau score / thin file Insufficient conventional history Manual review using income and banking\nevidence\n-Any 30+ days-past-due event in the previous 6 months triggers manual review.\n-Any 60+ days-past-due event in the previous 12 months triggers decline.\n-An active NPA, fraud flag, write-off or settled account reported in the previous 24 months triggers decline.\n-More than five hard bureau enquiries in the previous 6 months triggers manual review.\n-A clean repayment history may be treated as a mitigating factor but does not override a hard decline rule.",
+      "metadata": {
+        "policy_type": "synthetic_demo",
+        "page_start": 6,
+        "chunk_index": 1,
+        "section_number": "16",
+        "document_name": "Loan Underwriting Policy - RAG Demo Edition",
+        "section_title": "Credit Bureau and Repayment-History Rules",
+        "document_version": "1.0",
+        "source_file": "Loan_Underwriting_Policy_RAG_Demo_Edition.pdf",
+        "page_end": 6,
+        "chunk_size": 938
+      },
+      "matched_queries": [
+        {
+          "query_id": "protective-factor-1",
+          "reason": "Ext Source Mean reduced the model's predicted default risk.",
+          "rank": 1
+        }
+      ],
+      "fusion_score": 1.0,
+      "best_reranker_score": -2.267153263092041,
+      "best_vector_distance": 0.5361354947090149
+    }
+  ]
+}

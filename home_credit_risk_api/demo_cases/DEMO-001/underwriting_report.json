@@ -1,0 +1,156 @@
+{
+  "report_version": "1.0",
+  "demo_case_id": "DEMO-001",
+  "executive_summary": "The model estimates a default probability of 0.7174199819564819 and classifies the application as high risk. Under the demonstration-only policy, the high model-risk band requires manual review. Five additional required rules remain unknown because verified affordability, repayment-history, KYC and consent, and document-completeness information is unavailable. No evaluated rule has a verified hard failure; this report is decision support and not a legally binding lending decision.",
+  "model_assessment": {
+    "default_probability": 0.7174199819564819,
+    "risk_category": "high",
+    "model_version": "1.1.0",
+    "interpretation": "The model output places the application in the high-risk band and therefore indicates a need for human review under the supplied demonstration policy. This prediction is not a final lending or sanction decision."
+  },
+  "key_risk_factors": [
+    {
+      "feature": "EXT_SOURCE_MEAN",
+      "display_name": "Ext Source Mean",
+      "shap_value": 0.798836350440979,
+      "impact_direction": "increases_default_risk",
+      "explanation": "This feature contributed toward increasing the model's predicted default risk. The SHAP contribution does not establish causality or prove that any policy threshold was breached."
+    },
+    {
+      "feature": "CREDIT_ANNUITY_RATIO",
+      "display_name": "Credit Annuity Ratio",
+      "shap_value": 0.13348932564258575,
+      "impact_direction": "increases_default_risk",
+      "explanation": "This feature contributed toward increasing the model's predicted default risk. The SHAP contribution does not establish causality or independently demonstrate an affordability-policy breach."
+    },
+    {
+      "feature": "INST_LATE_PAYMENT_FLAG_MEAN",
+      "display_name": "Inst Late Payment Flag Mean",
+      "shap_value": 0.10084374994039536,
+      "impact_direction": "increases_default_risk",
+      "explanation": "This feature contributed toward increasing the model's predicted default risk. It does not establish causality or verify the specific six-month or twelve-month days-past-due history required by policy."
+    }
+  ],
+  "protective_factors": [
+    {
+      "feature": "CC_CC_BALANCE_LIMIT_RATIO_MAX",
+      "display_name": "Cc Cc Balance Limit Ratio Max",
+      "shap_value": -0.15823276340961456,
+      "impact_direction": "reduces_default_risk",
+      "explanation": "This feature contributed toward reducing the model's predicted default risk. The SHAP contribution does not establish causality and does not override policy review requirements."
+    }
+  ],
+  "policy_findings": [
+    {
+      "rule_id": "MODEL_RISK_BAND",
+      "finding": "Manual review is required. The applicant is in the high model-risk band, which requires human review under the demonstration policy.",
+      "applicant_relevance": "The applicant's model risk category is high, so this demonstration-only rule applies directly. This model classification is a review trigger, not a hard policy failure or final lending decision.",
+      "citation": {
+        "chunk_id": "loan-policy-v1.0-section-18-chunk-001",
+        "section_number": "18",
+        "section_title": "Decision Outcomes and Manual-Review Triggers",
+        "policy_type": "synthetic_demo",
+        "page_start": 6,
+        "page_end": 7
+      }
+    },
+    {
+      "rule_id": "CREDIT_TO_INCOME",
+      "finding": "The reported ratio is 2.151, but verified annual income has not been confirmed. The policy threshold cannot be deterministically applied, so the rule remains unknown and requires manual review.",
+      "applicant_relevance": "A reported credit-to-income ratio is available, but this demonstration-only rule requires verified annual income. The reported ratio must not be treated as a confirmed pass or failure until the income basis is verified.",
+      "citation": {
+        "chunk_id": "loan-policy-v1.0-section-15-chunk-001",
+        "section_number": "15",
+        "section_title": "Affordability and Exposure Limits",
+        "policy_type": "synthetic_demo",
+        "page_start": 5,
+        "page_end": 6
+      }
+    },
+    {
+      "rule_id": "FOIR",
+      "finding": "FOIR is unavailable. The rule remains unknown and requires manual review.",
+      "applicant_relevance": "The demonstration-only FOIR thresholds cannot be applied without the applicant's existing monthly debt obligations and verified net monthly income, together with the proposed EMI.",
+      "citation": {
+        "chunk_id": "loan-policy-v1.0-section-15-chunk-001",
+        "section_number": "15",
+        "section_title": "Affordability and Exposure Limits",
+        "policy_type": "synthetic_demo",
+        "page_start": 5,
+        "page_end": 6
+      }
+    },
+    {
+      "rule_id": "REPAYMENT_HISTORY_DPD",
+      "finding": "The required six-month and twelve-month DPD history is incomplete. The rule remains unknown and requires manual review.",
+      "applicant_relevance": "The demonstration-only policy requires specific 30+ DPD history for the previous six months and 60+ DPD history for the previous twelve months. A model feature related to late payments cannot substitute for this applicant-specific history.",
+      "citation": {
+        "chunk_id": "loan-policy-v1.0-section-16-chunk-001",
+        "section_number": "16",
+        "section_title": "Credit Bureau and Repayment-History Rules",
+        "policy_type": "synthetic_demo",
+        "page_start": 6,
+        "page_end": 6
+      }
+    },
+    {
+      "rule_id": "KYC_AND_CONSENT",
+      "finding": "KYC verification and valid consent are not both confirmed. The rule remains unknown and requires manual review.",
+      "applicant_relevance": "The demonstration-only rule requires both KYC verification and valid consent. Neither required confirmation is available, so no pass, failure, or hard policy breach can be established.",
+      "citation": {
+        "chunk_id": "loan-policy-v1.0-section-19-chunk-001",
+        "section_number": "19",
+        "section_title": "Automatic Decline Conditions",
+        "policy_type": "synthetic_demo",
+        "page_start": 7,
+        "page_end": 7
+      }
+    },
+    {
+      "rule_id": "DOCUMENT_COMPLETENESS",
+      "finding": "Document completeness is not available. The rule remains unknown and requires manual review.",
+      "applicant_relevance": "The demonstration-only policy requires complete documents for straight-through processing. Applicant-specific document-completeness status was not supplied and must be verified.",
+      "citation": {
+        "chunk_id": "loan-policy-v1.0-section-18-chunk-001",
+        "section_number": "18",
+        "section_title": "Decision Outcomes and Manual-Review Triggers",
+        "policy_type": "synthetic_demo",
+        "page_start": 6,
+        "page_end": 7
+      }
+    }
+  ],
+  "recommendation": {
+    "recommendation": "manual_review",
+    "rationale": "Manual review is required because the applicant is in the high model-risk band and the required credit-to-income, FOIR, repayment-history DPD, KYC and consent, and document-completeness rules cannot be fully determined from the available information. No evaluated rule has a verified hard failure, so a decline recommendation is not supported by the deterministic policy evaluation.",
+    "human_review_required": true,
+    "basis": [
+      "model_risk_band",
+      "policy_rule",
+      "missing_information"
+    ]
+  },
+  "missing_information": [
+    "Verified annual income needed to evaluate the reported credit-to-income ratio under policy",
+    "FOIR, including existing monthly debt obligations and verified net monthly income",
+    "Complete 30+ days-past-due history for the previous six months",
+    "Complete 60+ days-past-due history for the previous twelve months",
+    "KYC verification status",
+    "Valid customer-consent status",
+    "Required document-completeness status"
+  ],
+  "recommended_actions": [
+    "Route the application to an authorized human credit decision-maker for manual review.",
+    "Verify annual income and recalculate or validate the credit-to-income ratio against the demonstration-only policy thresholds.",
+    "Obtain existing monthly debt obligations and verified net monthly income, then calculate FOIR using the proposed EMI.",
+    "Obtain and verify the required six-month and twelve-month days-past-due history.",
+    "Confirm KYC verification and valid customer consent.",
+    "Confirm that all required application documents are complete and valid.",
+    "Do not treat the model risk band or SHAP contributions as proof of a hard policy failure."
+  ],
+  "limitations": [
+    "SHAP values explain feature contributions to the model prediction; they do not establish causality or prove that a policy threshold was breached.",
+    "All synthetic_demo policy rules cited in this report are demonstration-only and must not be treated as production lending policy.",
+    "This report is decision support rather than a legally binding approval, decline, or sanction. Final sanction requires an authorized human credit decision-maker."
+  ]
+}

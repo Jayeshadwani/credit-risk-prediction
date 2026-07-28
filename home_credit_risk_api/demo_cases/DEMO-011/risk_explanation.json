@@ -1,0 +1,60 @@
+{
+  "demo_case_id": "DEMO-011",
+  "model_output": {
+    "default_probability": 0.37854328751564026,
+    "non_default_probability": 0.6214567124843597,
+    "risk_category": "medium",
+    "model_version": "1.1.0"
+  },
+  "top_risk_factors": [
+    {
+      "feature": "NAME_EDUCATION_TYPE",
+      "display_name": "Name Education Type",
+      "raw_value": "Secondary / secondary special",
+      "model_value": 4.0,
+      "shap_value": 0.08587109297513962,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "EXT_SOURCE_MISSING_COUNT",
+      "display_name": "Ext Source Missing Count",
+      "raw_value": 2.0,
+      "model_value": 2.0,
+      "shap_value": 0.06548833847045898,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "EXT_SOURCE_MAX",
+      "display_name": "Ext Source Max",
+      "raw_value": 0.5549077392,
+      "model_value": 0.5549077392,
+      "shap_value": 0.06516770273447037,
+      "impact": "increases_default_risk"
+    }
+  ],
+  "top_protective_factors": [
+    {
+      "feature": "EXT_SOURCE_MEAN",
+      "display_name": "Ext Source Mean",
+      "raw_value": 0.5549077392,
+      "model_value": 0.5549077392,
+      "shap_value": -0.32797178626060486,
+      "impact": "reduces_default_risk"
+    },
+    {
+      "feature": "CREDIT_GOODS_RATIO",
+      "display_name": "Credit Goods Ratio",
+      "raw_value": 1.0792000294,
+      "model_value": 1.0792000294,
+      "shap_value": -0.09335656464099884,
+      "impact": "reduces_default_risk"
+    }
+  ],
+  "explanation_metadata": {
+    "method": "SHAP",
+    "shap_output_scale": "raw_model_output",
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

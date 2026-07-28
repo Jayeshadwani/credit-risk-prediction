@@ -1,0 +1,155 @@
+{
+  "demo_case_id": "DEMO-008",
+  "generated_queries": [
+    {
+      "query_id": "risk-band",
+      "reason": "Applicant is classified as high risk.",
+      "query": "What decision, approval, or manual-review requirements apply to a high-risk loan applicant?"
+    },
+    {
+      "query_id": "risk-factor-1",
+      "reason": "Ext Source Mean increased the model's predicted default risk.",
+      "query": "What policy rules apply when external creditworthiness indicators suggest a weak or borderline credit profile, and when is manual review or decline required?"
+    },
+    {
+      "query_id": "risk-factor-2",
+      "reason": "Bureau Bureau Debt Credit Ratio Max increased the model's predicted default risk.",
+      "query": "What FOIR, credit-to-income, repayment-burden, or residual-income thresholds determine whether an application should continue, receive manual review, or be declined?"
+    },
+    {
+      "query_id": "risk-factor-3",
+      "reason": "Credit Annuity Ratio increased the model's predicted default risk.",
+      "query": "What affordability, repayment-capacity, and tenor rules apply when the requested credit amount is high relative to the loan annuity?"
+    }
+  ],
+  "retrieval_configuration": {
+    "top_k_per_query": 3,
+    "candidate_k": 8,
+    "maximum_final_chunks": 4,
+    "policy_types": [
+      "source_derived",
+      "synthetic_demo"
+    ]
+  },
+  "retrieved_policy_chunks": [
+    {
+      "chunk_id": "loan-policy-v1.0-section-15-chunk-001",
+      "text": "15. Affordability and Exposure Limits\n\n15.1 Fixed Obligation to Income Ratio (FOIR). For the demo, FOIR is calculated as existing monthly debt\nobligations plus the proposed EMI, divided by verified net monthly income.\nThreshold Interpretation Action\nFOIR <= 40% Within standard affordability range Continue to remaining rules\nFOIR > 40% and <= 50% Elevated repayment burden Manual review or lower sanctioned\namount\nFOIR > 50% Unacceptable repayment burden Decline\n15.2 Credit-to-income ratio. Requested credit divided by verified annual income is assessed as follows:\nCredit / annual income Interpretation Action\n<= 3.0x Standard range Continue\nCredit / annual income Interpretation Action\n> 3.0x and <= 5.0x High leverage Manual review or reduced amount\n> 5.0x Outside demo risk appetite Decline\n-The maximum sanctioned amount is the lower of the applicable product cap, five times verified annual income and\nthe amount supported by the FOIR test.\n-A request within 10% of any maximum limit is routed to manual review.\n-The applicant should retain a positive residual monthly income after all obligations; negative or near-zero residual\nincome is a decline condition.",
+      "metadata": {
+        "policy_type": "synthetic_demo",
+        "document_version": "1.0",
+        "page_start": 5,
+        "source_file": "Loan_Underwriting_Policy_RAG_Demo_Edition.pdf",
+        "document_name": "Loan Underwriting Policy - RAG Demo Edition",
+        "chunk_size": 1168,
+        "section_title": "Affordability and Exposure Limits",
+        "section_number": "15",
+        "chunk_index": 1,
+        "page_end": 6
+      },
+      "matched_queries": [
+        {
+          "query_id": "risk-factor-2",
+          "reason": "Bureau Bureau Debt Credit Ratio Max increased the model's predicted default risk.",
+          "rank": 1
+        },
+        {
+          "query_id": "risk-factor-3",
+          "reason": "Credit Annuity Ratio increased the model's predicted default risk.",
+          "rank": 1
+        }
+      ],
+      "fusion_score": 2.0,
+      "best_reranker_score": 4.070797920227051,
+      "best_vector_distance": 0.3332293629646301
+    },
+    {
+      "chunk_id": "loan-policy-v1.0-section-18-chunk-001",
+      "text": "18. Decision Outcomes and Manual-Review Triggers\n\nRecommendation Minimum conditions\nEligible for straight-through processing Low model risk; no hard decline or manual-review trigger;\nRecommendation Minimum conditions\ndocuments complete; affordability within standard limits.\nConditional approval Low or medium risk with a remediable condition such as reduced\namount, additional proof or guarantor.\nManual review Any medium/high model band, thin file, borderline affordability,\nincome discrepancy, recent enquiry spike, missing non-critical\ndocument or conflicting data.\nDecline At least one hard decline condition in Section 19.\n18.1 Mandatory manual-review triggers include:\n-Medium or high model-risk band.\n-FOIR above 40% and up to 50%, or credit-to-income ratio above 3.0x and up to 5.0x.\n-Bureau score below 700 but not subject to a hard decline.\n-No bureau score or limited credit history.\n-Declared-versus-observed income discrepancy of 10%-25%.\n-Income volatility above 30% across the available observation period.\n-Requested amount within 10% of a product or exposure cap.\n-Student applicant or any application requiring a guarantor.\n-Conflicting KYC, employment, account-ownership or repayment information that can potentially be resolved.",
+      "metadata": {
+        "chunk_size": 1249,
+        "section_title": "Decision Outcomes and Manual-Review Triggers",
+        "policy_type": "synthetic_demo",
+        "page_start": 6,
+        "source_file": "Loan_Underwriting_Policy_RAG_Demo_Edition.pdf",
+        "page_end": 7,
+        "document_version": "1.0",
+        "document_name": "Loan Underwriting Policy - RAG Demo Edition",
+        "chunk_index": 1,
+        "section_number": "18"
+      },
+      "matched_queries": [
+        {
+          "query_id": "risk-band",
+          "reason": "Applicant is classified as high risk.",
+          "rank": 1
+        },
+        {
+          "query_id": "risk-factor-1",
+          "reason": "Ext Source Mean increased the model's predicted default risk.",
+          "rank": 2
+        }
+      ],
+      "fusion_score": 1.5,
+      "best_reranker_score": 3.1194982528686523,
+      "best_vector_distance": 0.36379194259643555
+    },
+    {
+      "chunk_id": "loan-policy-v1.0-section-16-chunk-001",
+      "text": "16. Credit Bureau and Repayment-History Rules\n\nCondition Interpretation Action\nBureau score >= 700 Acceptable bureau profile Continue\nBureau score 650-699 Borderline profile Manual review\nBureau score 600-649 Weak profile Manual review only with strong mitigants\nBureau score < 600 Outside demo risk appetite Decline unless score is unavailable due to a\nverified thin file\nNo bureau score / thin file Insufficient conventional history Manual review using income and banking\nevidence\n-Any 30+ days-past-due event in the previous 6 months triggers manual review.\n-Any 60+ days-past-due event in the previous 12 months triggers decline.\n-An active NPA, fraud flag, write-off or settled account reported in the previous 24 months triggers decline.\n-More than five hard bureau enquiries in the previous 6 months triggers manual review.\n-A clean repayment history may be treated as a mitigating factor but does not override a hard decline rule.",
+      "metadata": {
+        "document_name": "Loan Underwriting Policy - RAG Demo Edition",
+        "chunk_index": 1,
+        "page_start": 6,
+        "section_number": "16",
+        "policy_type": "synthetic_demo",
+        "section_title": "Credit Bureau and Repayment-History Rules",
+        "chunk_size": 938,
+        "page_end": 6,
+        "document_version": "1.0",
+        "source_file": "Loan_Underwriting_Policy_RAG_Demo_Edition.pdf"
+      },
+      "matched_queries": [
+        {
+          "query_id": "risk-factor-1",
+          "reason": "Ext Source Mean increased the model's predicted default risk.",
+          "rank": 1
+        }
+      ],
+      "fusion_score": 1.0,
+      "best_reranker_score": 1.779828429222107,
+      "best_vector_distance": 0.3869788646697998
+    },
+    {
+      "chunk_id": "loan-policy-v1.0-section-appendix-26-chunk-001",
+      "text": "appendix-26. Appendix A - Consolidated Decision Matrix\n\nDEMO ADDITION - operational rules for the portfolio project\nRule Standard condition Standard action Exception / breach Action\nKYC / consent Pass Continue Fail Decline recommendation\nIncome verification Verified Continue Unverifiable for unsecured Decline, except eligible\nloan student with guarantor\nFOIR <= 40% Continue >40%-50% / >50% Manual review / Decline\nCredit-to-income <= 3.0x Continue >3.0x-5.0x / >5.0x Manual review / Decline\nBureau score >= 700 Continue 650-699 / 600-649 / <600 Manual / Manual with\nmitigants / Decline subject to\nthin-file exception\nRecent repayment No adverse DPD Continue 30+ DPD in 6m / 60+ DPD in Manual / Decline\n12m\nModel band Low Potential straight-through Medium / High Manual / Senior manual\nroute review\nSensitive feature Not used in narrative Compliant Appears as decision reason Suppress and flag\ngovernance defect",
+      "metadata": {
+        "policy_type": "synthetic_demo",
+        "chunk_size": 913,
+        "page_end": 9,
+        "section_number": "appendix-26",
+        "source_file": "Loan_Underwriting_Policy_RAG_Demo_Edition.pdf",
+        "document_version": "1.0",
+        "page_start": 9,
+        "document_name": "Loan Underwriting Policy - RAG Demo Edition",
+        "section_title": "Appendix A - Consolidated Decision Matrix",
+        "chunk_index": 1
+      },
+      "matched_queries": [
+        {
+          "query_id": "risk-band",
+          "reason": "Applicant is classified as high risk.",
+          "rank": 3
+        },
+        {
+          "query_id": "risk-factor-2",
+          "reason": "Bureau Bureau Debt Credit Ratio Max increased the model's predicted default risk.",
+          "rank": 2
+        }
+      ],
+      "fusion_score": 0.8333333333333333,
+      "best_reranker_score": -0.814007043838501,
+      "best_vector_distance": 0.3489576578140259
+    }
+  ]
+}

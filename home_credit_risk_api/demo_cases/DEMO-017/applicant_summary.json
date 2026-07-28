@@ -1,0 +1,41 @@
+{
+  "demo_case_id": "DEMO-017",
+  "application": {
+    "contract_type": "Cash loans",
+    "credit_amount": 521280.0,
+    "loan_annuity": 31630.5,
+    "goods_price": 450000.0
+  },
+  "financial_profile": {
+    "total_income": 450000.0,
+    "income_type": "Working",
+    "credit_income_ratio": 1.158,
+    "annuity_income_ratio": 0.07
+  },
+  "employment_profile": {
+    "occupation_type": "Managers",
+    "organization_type": "Business Entity Type 3",
+    "employment_years": 7.9
+  },
+  "household_profile": {
+    "family_status": "Married",
+    "housing_type": "Municipal apartment",
+    "children_count": 1.0,
+    "family_members": 3.0
+  },
+  "credit_indicators": {
+    "external_score_1": 0.50544554,
+    "external_score_2": 0.373613596,
+    "external_score_3": 0.2485355586
+  },
+  "model_output": {
+    "default_probability": 0.7329208850860596,
+    "risk_category": "high"
+  },
+  "metadata": {
+    "age_years": 45.9,
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

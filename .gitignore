@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Raw datasets and generated local indexes
+home_credit_risk_api/home_credit_data/
+home_credit_risk_api/vector_store/
+
+# Notebook checkpoints
+.ipynb_checkpoints/

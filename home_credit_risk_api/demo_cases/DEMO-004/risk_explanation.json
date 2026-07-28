@@ -1,0 +1,60 @@
+{
+  "demo_case_id": "DEMO-004",
+  "model_output": {
+    "default_probability": 0.6054621338844299,
+    "non_default_probability": 0.39453786611557007,
+    "risk_category": "high",
+    "model_version": "1.1.0"
+  },
+  "top_risk_factors": [
+    {
+      "feature": "INST_LATE_PAYMENT_FLAG_MEAN",
+      "display_name": "Inst Late Payment Flag Mean",
+      "raw_value": 0.3333333433,
+      "model_value": 0.3333333433,
+      "shap_value": 0.20230913162231445,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "POS_CNT_INSTALMENT_FUTURE_MEAN",
+      "display_name": "Pos Cnt Instalment Future Mean",
+      "raw_value": 21.0,
+      "model_value": 21.0,
+      "shap_value": 0.19879238307476044,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "CREDIT_ANNUITY_RATIO",
+      "display_name": "Credit Annuity Ratio",
+      "raw_value": 12.5221242905,
+      "model_value": 12.5221242905,
+      "shap_value": 0.10273247212171555,
+      "impact": "increases_default_risk"
+    }
+  ],
+  "top_protective_factors": [
+    {
+      "feature": "AMT_ANNUITY",
+      "display_name": "Loan annuity amount",
+      "raw_value": 12204.0,
+      "model_value": 12204.0,
+      "shap_value": -0.15313774347305298,
+      "impact": "reduces_default_risk"
+    },
+    {
+      "feature": "EXT_SOURCE_MEAN",
+      "display_name": "Ext Source Mean",
+      "raw_value": 0.4852919579,
+      "model_value": 0.4852919579,
+      "shap_value": -0.11537604033946991,
+      "impact": "reduces_default_risk"
+    }
+  ],
+  "explanation_metadata": {
+    "method": "SHAP",
+    "shap_output_scale": "raw_model_output",
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

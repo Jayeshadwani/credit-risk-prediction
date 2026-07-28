@@ -1,0 +1,297 @@
+{
+  "report_version": "1.0",
+  "demo_case_id": "DEMO-001",
+  "applicant_summary": {
+    "demo_case_id": "DEMO-001",
+    "application": {
+      "contract_type": "Cash loans",
+      "credit_amount": 271066.5,
+      "loan_annuity": 24988.5,
+      "goods_price": 234000.0
+    },
+    "financial_profile": {
+      "total_income": 126000.0,
+      "income_type": "Working",
+      "credit_income_ratio": 2.151,
+      "annuity_income_ratio": 0.198
+    },
+    "employment_profile": {
+      "occupation_type": "Laborers",
+      "organization_type": "Transport: type 4",
+      "employment_years": 5.8
+    },
+    "household_profile": {
+      "family_status": "Civil marriage",
+      "housing_type": "House / apartment",
+      "children_count": 0.0,
+      "family_members": 2.0
+    },
+    "credit_indicators": {
+      "external_score_1": 0.166307807,
+      "external_score_2": 0.1157590821,
+      "external_score_3": 0.5352762341
+    },
+    "model_output": {
+      "default_probability": 0.7174199819564819,
+      "risk_category": "high"
+    },
+    "metadata": {
+      "sensitive_features_excluded": [
+        "CODE_GENDER"
+      ]
+    }
+  },
+  "model_assessment": {
+    "default_probability": 0.7174199819564819,
+    "non_default_probability": 0.28258001804351807,
+    "risk_category": "high",
+    "model_version": "1.1.0"
+  },
+  "model_explanation": {
+    "shap_output_scale": "raw_model_output",
+    "risk_factors": [
+      {
+        "feature": "EXT_SOURCE_MEAN",
+        "display_name": "Ext Source Mean",
+        "raw_value": 0.1410334408,
+        "model_value": 0.1410334408,
+        "shap_value": 0.798836350440979,
+        "impact_direction": "increases_default_risk"
+      },
+      {
+        "feature": "CREDIT_ANNUITY_RATIO",
+        "display_name": "Credit Annuity Ratio",
+        "raw_value": 10.8476495743,
+        "model_value": 10.8476495743,
+        "shap_value": 0.13348932564258575,
+        "impact_direction": "increases_default_risk"
+      },
+      {
+        "feature": "INST_LATE_PAYMENT_FLAG_MEAN",
+        "display_name": "Inst Late Payment Flag Mean",
+        "raw_value": 0.2093023211,
+        "model_value": 0.2093023211,
+        "shap_value": 0.10084374994039536,
+        "impact_direction": "increases_default_risk"
+      }
+    ],
+    "protective_factors": [
+      {
+        "feature": "CC_CC_BALANCE_LIMIT_RATIO_MAX",
+        "display_name": "Cc Cc Balance Limit Ratio Max",
+        "raw_value": 0.0,
+        "model_value": 0.0,
+        "shap_value": -0.15823276340961456,
+        "impact_direction": "reduces_default_risk"
+      }
+    ]
+  },
+  "policy_evidence": [
+    {
+      "chunk_id": "loan-policy-v1.0-section-16-chunk-001",
+      "section_number": "16",
+      "section_title": "Credit Bureau and Repayment-History Rules",
+      "policy_type": "synthetic_demo",
+      "page_start": 6,
+      "page_end": 6,
+      "text": "16. Credit Bureau and Repayment-History Rules\n\nCondition Interpretation Action\nBureau score >= 700 Acceptable bureau profile Continue\nBureau score 650-699 Borderline profile Manual review\nBureau score 600-649 Weak profile Manual review only with strong mitigants\nBureau score < 600 Outside demo risk appetite Decline unless score is unavailable due to a\nverified thin file\nNo bureau score / thin file Insufficient conventional history Manual review using income and banking\nevidence\n-Any 30+ days-past-due event in the previous 6 months triggers manual review.\n-Any 60+ days-past-due event in the previous 12 months triggers decline.\n-An active NPA, fraud flag, write-off or settled account reported in the previous 24 months triggers decline.\n-More than five hard bureau enquiries in the previous 6 months triggers manual review.\n-A clean repayment history may be treated as a mitigating factor but does not override a hard decline rule.",
+      "matched_queries": [
+        {
+          "query_id": "risk-factor-1",
+          "reason": "Ext Source Mean increased the model's predicted default risk.",
+          "rank": 1
+        },
+        {
+          "query_id": "risk-factor-3",
+          "reason": "Inst Late Payment Flag Mean increased the model's predicted default risk.",
+          "rank": 1
+        }
+      ],
+      "fusion_score": 2.0,
+      "reranker_score": 1.779828429222107
+    },
+    {
+      "chunk_id": "loan-policy-v1.0-section-18-chunk-001",
+      "section_number": "18",
+      "section_title": "Decision Outcomes and Manual-Review Triggers",
+      "policy_type": "synthetic_demo",
+      "page_start": 6,
+      "page_end": 7,
+      "text": "18. Decision Outcomes and Manual-Review Triggers\n\nRecommendation Minimum conditions\nEligible for straight-through processing Low model risk; no hard decline or manual-review trigger;\nRecommendation Minimum conditions\ndocuments complete; affordability within standard limits.\nConditional approval Low or medium risk with a remediable condition such as reduced\namount, additional proof or guarantor.\nManual review Any medium/high model band, thin file, borderline affordability,\nincome discrepancy, recent enquiry spike, missing non-critical\ndocument or conflicting data.\nDecline At least one hard decline condition in Section 19.\n18.1 Mandatory manual-review triggers include:\n-Medium or high model-risk band.\n-FOIR above 40% and up to 50%, or credit-to-income ratio above 3.0x and up to 5.0x.\n-Bureau score below 700 but not subject to a hard decline.\n-No bureau score or limited credit history.\n-Declared-versus-observed income discrepancy of 10%-25%.\n-Income volatility above 30% across the available observation period.\n-Requested amount within 10% of a product or exposure cap.\n-Student applicant or any application requiring a guarantor.\n-Conflicting KYC, employment, account-ownership or repayment information that can potentially be resolved.",
+      "matched_queries": [
+        {
+          "query_id": "risk-band",
+          "reason": "Applicant is classified as high risk.",
+          "rank": 1
+        },
+        {
+          "query_id": "risk-factor-1",
+          "reason": "Ext Source Mean increased the model's predicted default risk.",
+          "rank": 2
+        }
+      ],
+      "fusion_score": 1.5,
+      "reranker_score": 3.1194982528686523
+    },
+    {
+      "chunk_id": "loan-policy-v1.0-section-15-chunk-001",
+      "section_number": "15",
+      "section_title": "Affordability and Exposure Limits",
+      "policy_type": "synthetic_demo",
+      "page_start": 5,
+      "page_end": 6,
+      "text": "15. Affordability and Exposure Limits\n\n15.1 Fixed Obligation to Income Ratio (FOIR). For the demo, FOIR is calculated as existing monthly debt\nobligations plus the proposed EMI, divided by verified net monthly income.\nThreshold Interpretation Action\nFOIR <= 40% Within standard affordability range Continue to remaining rules\nFOIR > 40% and <= 50% Elevated repayment burden Manual review or lower sanctioned\namount\nFOIR > 50% Unacceptable repayment burden Decline\n15.2 Credit-to-income ratio. Requested credit divided by verified annual income is assessed as follows:\nCredit / annual income Interpretation Action\n<= 3.0x Standard range Continue\nCredit / annual income Interpretation Action\n> 3.0x and <= 5.0x High leverage Manual review or reduced amount\n> 5.0x Outside demo risk appetite Decline\n-The maximum sanctioned amount is the lower of the applicable product cap, five times verified annual income and\nthe amount supported by the FOIR test.\n-A request within 10% of any maximum limit is routed to manual review.\n-The applicant should retain a positive residual monthly income after all obligations; negative or near-zero residual\nincome is a decline condition.",
+      "matched_queries": [
+        {
+          "query_id": "risk-factor-2",
+          "reason": "Credit Annuity Ratio increased the model's predicted default risk.",
+          "rank": 1
+        }
+      ],
+      "fusion_score": 1.0,
+      "reranker_score": -2.2875332832336426
+    },
+    {
+      "chunk_id": "loan-policy-v1.0-section-19-chunk-001",
+      "section_number": "19",
+      "section_title": "Automatic Decline Conditions",
+      "policy_type": "synthetic_demo",
+      "page_start": 7,
+      "page_end": 7,
+      "text": "19. Automatic Decline Conditions\n\nHuman-control requirement\nA hard-rule decline may be automatically recommended, but the API or LLM must not execute a legal sanction decision.\nThe reason and supporting evidence must be available for authorized review.\n-KYC or identity verification failure, invalid consent, confirmed fraud match or prohibited customer/use case.\n-No verifiable regular income for an unsecured loan, except an eligible student case with an acceptable guarantor.\n-FOIR above 50% or credit-to-annual-income ratio above 5.0x.\n-Active NPA, confirmed fraud, write-off or settled credit account within the previous 24 months.\n-Any 60+ days-past-due event within the previous 12 months.\n-Bureau score below 600 when the score is valid and adverse repayment history is also present.\n-Age outside the product eligibility range at maturity.\n-Material document manipulation, unexplained income discrepancy above 25%, or a negative residual-income\nassessment.",
+      "matched_queries": [
+        {
+          "query_id": "risk-factor-1",
+          "reason": "Ext Source Mean increased the model's predicted default risk.",
+          "rank": 3
+        },
+        {
+          "query_id": "risk-factor-3",
+          "reason": "Inst Late Payment Flag Mean increased the model's predicted default risk.",
+          "rank": 2
+        }
+      ],
+      "fusion_score": 0.8333333333333333,
+      "reranker_score": -1.3428020477294922
+    }
+  ],
+  "generation_constraints": [
+    "Use only facts present in this report input.",
+    "Do not infer that a policy threshold was breached unless the applicant value is explicitly available.",
+    "Every policy finding must cite one supplied chunk_id.",
+    "Describe SHAP values as model contributions, not causal explanations.",
+    "Do not use or infer sensitive or protected attributes.",
+    "Synthetic demo policy rules must be identified as demonstration-only rules.",
+    "Do not issue a legally binding approval, decline, or loan-sanction decision.",
+    "Final sanction remains with an authorized human credit decision-maker."
+  ],
+  "deterministic_policy_evaluation": {
+    "rules": [
+      {
+        "rule_id": "MODEL_RISK_BAND",
+        "rule_name": "Model risk-band treatment",
+        "evaluation_status": "manual_review",
+        "recommended_action": "manual_review",
+        "applicant_value": "high",
+        "threshold": "medium or high requires manual review",
+        "reason": "The applicant is in the high model-risk band, which requires human review under the demonstration policy.",
+        "required_for_stp": true,
+        "citation": {
+          "section_number": "18",
+          "section_title": "Decision Outcomes and Manual-Review Triggers",
+          "policy_type": "synthetic_demo"
+        }
+      },
+      {
+        "rule_id": "CREDIT_TO_INCOME",
+        "rule_name": "Credit-to-annual-income ratio",
+        "evaluation_status": "unknown",
+        "recommended_action": "manual_review",
+        "applicant_value": 2.151,
+        "threshold": "<=3.0x pass; >3.0x to 5.0x review; >5.0x hard failure",
+        "reason": "The reported ratio is 2.151, but verified annual income has not been confirmed. The policy threshold cannot be deterministically applied.",
+        "required_for_stp": true,
+        "citation": {
+          "section_number": "15",
+          "section_title": "Affordability and Exposure Limits",
+          "policy_type": "synthetic_demo"
+        }
+      },
+      {
+        "rule_id": "FOIR",
+        "rule_name": "Fixed Obligation to Income Ratio",
+        "evaluation_status": "unknown",
+        "recommended_action": "manual_review",
+        "applicant_value": null,
+        "threshold": "<=40% pass; >40% to 50% review; >50% hard failure",
+        "reason": "FOIR is unavailable.",
+        "required_for_stp": true,
+        "citation": {
+          "section_number": "15",
+          "section_title": "Affordability and Exposure Limits",
+          "policy_type": "synthetic_demo"
+        }
+      },
+      {
+        "rule_id": "REPAYMENT_HISTORY_DPD",
+        "rule_name": "Recent days-past-due history",
+        "evaluation_status": "unknown",
+        "recommended_action": "manual_review",
+        "applicant_value": null,
+        "threshold": "30+ DPD in 6 months requires review; 60+ DPD in 12 months is a hard failure",
+        "reason": "The required six-month and twelve-month DPD history is incomplete.",
+        "required_for_stp": true,
+        "citation": {
+          "section_number": "16",
+          "section_title": "Credit Bureau and Repayment-History Rules",
+          "policy_type": "synthetic_demo"
+        }
+      },
+      {
+        "rule_id": "KYC_AND_CONSENT",
+        "rule_name": "KYC and customer consent",
+        "evaluation_status": "unknown",
+        "recommended_action": "manual_review",
+        "applicant_value": "kyc=None, consent=None",
+        "threshold": "Both KYC and valid consent must pass",
+        "reason": "KYC verification and valid consent are not both confirmed.",
+        "required_for_stp": true,
+        "citation": {
+          "section_number": "19",
+          "section_title": "Automatic Decline Conditions",
+          "policy_type": "synthetic_demo"
+        }
+      },
+      {
+        "rule_id": "DOCUMENT_COMPLETENESS",
+        "rule_name": "Required document completeness",
+        "evaluation_status": "unknown",
+        "recommended_action": "manual_review",
+        "applicant_value": null,
+        "threshold": "Required documents must be complete",
+        "reason": "Document completeness is not available.",
+        "required_for_stp": true,
+        "citation": {
+          "section_number": "18",
+          "section_title": "Decision Outcomes and Manual-Review Triggers",
+          "policy_type": "synthetic_demo"
+        }
+      }
+    ],
+    "summary": {
+      "recommendation": "manual_review",
+      "human_review_required": true,
+      "failed_rule_ids": [],
+      "manual_review_rule_ids": [
+        "MODEL_RISK_BAND"
+      ],
+      "unknown_required_rule_ids": [
+        "CREDIT_TO_INCOME",
+        "FOIR",
+        "REPAYMENT_HISTORY_DPD",
+        "KYC_AND_CONSENT",
+        "DOCUMENT_COMPLETENESS"
+      ]
+    }
+  }
+}

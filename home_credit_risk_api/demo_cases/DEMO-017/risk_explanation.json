@@ -1,0 +1,60 @@
+{
+  "demo_case_id": "DEMO-017",
+  "model_output": {
+    "default_probability": 0.7329208850860596,
+    "non_default_probability": 0.26707911491394043,
+    "risk_category": "high",
+    "model_version": "1.1.0"
+  },
+  "top_risk_factors": [
+    {
+      "feature": "EXT_SOURCE_MEAN",
+      "display_name": "Ext Source Mean",
+      "raw_value": 0.3110745847,
+      "model_value": 0.3110745847,
+      "shap_value": 0.5583488345146179,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "BUREAU_BUREAU_DEBT_CREDIT_RATIO_MAX",
+      "display_name": "Bureau Bureau Debt Credit Ratio Max",
+      "raw_value": 1.0428823233,
+      "model_value": 1.0428823233,
+      "shap_value": 0.2750873267650604,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "AMT_ANNUITY",
+      "display_name": "Loan annuity amount",
+      "raw_value": 31630.5,
+      "model_value": 31630.5,
+      "shap_value": 0.11692805588245392,
+      "impact": "increases_default_risk"
+    }
+  ],
+  "top_protective_factors": [
+    {
+      "feature": "EXT_SOURCE_MIN",
+      "display_name": "Ext Source Min",
+      "raw_value": 0.2485355586,
+      "model_value": 0.2485355586,
+      "shap_value": -0.07633496820926666,
+      "impact": "reduces_default_risk"
+    },
+    {
+      "feature": "FLAG_DOCUMENT_3",
+      "display_name": "Flag Document 3",
+      "raw_value": 0.0,
+      "model_value": 0.0,
+      "shap_value": -0.06874541193246841,
+      "impact": "reduces_default_risk"
+    }
+  ],
+  "explanation_metadata": {
+    "method": "SHAP",
+    "shap_output_scale": "raw_model_output",
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

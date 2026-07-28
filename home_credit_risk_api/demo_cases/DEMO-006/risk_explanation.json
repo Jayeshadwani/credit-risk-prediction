@@ -1,0 +1,60 @@
+{
+  "demo_case_id": "DEMO-006",
+  "model_output": {
+    "default_probability": 0.6255639791488647,
+    "non_default_probability": 0.37443602085113525,
+    "risk_category": "high",
+    "model_version": "1.1.0"
+  },
+  "top_risk_factors": [
+    {
+      "feature": "BUREAU_BUREAU_DEBT_CREDIT_RATIO_MAX",
+      "display_name": "Bureau Bureau Debt Credit Ratio Max",
+      "raw_value": 1.0352461338,
+      "model_value": 1.0352461338,
+      "shap_value": 0.37319523096084595,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "POS_CNT_INSTALMENT_FUTURE_MEAN",
+      "display_name": "Pos Cnt Instalment Future Mean",
+      "raw_value": 26.9024391174,
+      "model_value": 26.9024391174,
+      "shap_value": 0.24145159125328064,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "EXT_SOURCE_MEAN",
+      "display_name": "Ext Source Mean",
+      "raw_value": 0.4220011532,
+      "model_value": 0.4220011532,
+      "shap_value": 0.18591637909412384,
+      "impact": "increases_default_risk"
+    }
+  ],
+  "top_protective_factors": [
+    {
+      "feature": "AMT_ANNUITY",
+      "display_name": "Loan annuity amount",
+      "raw_value": 15516.0,
+      "model_value": 15516.0,
+      "shap_value": -0.16068601608276367,
+      "impact": "reduces_default_risk"
+    },
+    {
+      "feature": "CREDIT_GOODS_RATIO",
+      "display_name": "Credit Goods Ratio",
+      "raw_value": 1.0,
+      "model_value": 1.0,
+      "shap_value": -0.11816349625587463,
+      "impact": "reduces_default_risk"
+    }
+  ],
+  "explanation_metadata": {
+    "method": "SHAP",
+    "shap_output_scale": "raw_model_output",
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

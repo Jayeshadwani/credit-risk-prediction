@@ -1,0 +1,60 @@
+{
+  "demo_case_id": "DEMO-010",
+  "model_output": {
+    "default_probability": 0.25976797938346863,
+    "non_default_probability": 0.7402320206165314,
+    "risk_category": "low",
+    "model_version": "1.1.0"
+  },
+  "top_risk_factors": [
+    {
+      "feature": "REGION_RATING_CLIENT_W_CITY",
+      "display_name": "City-adjusted region risk rating",
+      "raw_value": 3.0,
+      "model_value": 3.0,
+      "shap_value": 0.09267041087150574,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "INST_DBD_MAX",
+      "display_name": "Inst Dbd Max",
+      "raw_value": 109.0,
+      "model_value": 109.0,
+      "shap_value": 0.06203555688261986,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "CREDIT_ANNUITY_RATIO",
+      "display_name": "Credit Annuity Ratio",
+      "raw_value": 20.0,
+      "model_value": 20.0,
+      "shap_value": 0.054891422390937805,
+      "impact": "increases_default_risk"
+    }
+  ],
+  "top_protective_factors": [
+    {
+      "feature": "CREDIT_GOODS_RATIO",
+      "display_name": "Credit Goods Ratio",
+      "raw_value": 1.0,
+      "model_value": 1.0,
+      "shap_value": -0.14673374593257904,
+      "impact": "reduces_default_risk"
+    },
+    {
+      "feature": "HISTORICAL_PAYMENT_INCOME_RATIO",
+      "display_name": "Historical Payment Income Ratio",
+      "raw_value": 8.3004417419,
+      "model_value": 8.3004417419,
+      "shap_value": -0.124846912920475,
+      "impact": "reduces_default_risk"
+    }
+  ],
+  "explanation_metadata": {
+    "method": "SHAP",
+    "shap_output_scale": "raw_model_output",
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

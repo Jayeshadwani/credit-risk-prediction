@@ -1,0 +1,161 @@
+{
+  "report_version": "1.0",
+  "demo_case_id": "DEMO-013",
+  "executive_summary": "The model estimates a default probability of 0.453766793012619 and classifies the application as medium risk. Under the demonstration-only policy, the medium model-risk band requires human review. Five additional required policy rules cannot be deterministically evaluated because necessary verified information is unavailable. No rule has an evaluation status of fail, so no verified hard policy condition has been established.",
+  "model_assessment": {
+    "default_probability": 0.453766793012619,
+    "risk_category": "medium",
+    "model_version": "1.1.0",
+    "interpretation": "The model places the application in the medium-risk band. This output supports risk assessment and human review but is not a final lending decision."
+  },
+  "key_risk_factors": [
+    {
+      "feature": "BUREAU_BUREAU_DEBT_CREDIT_RATIO_MAX",
+      "display_name": "Bureau Bureau Debt Credit Ratio Max",
+      "shap_value": 0.28641510009765625,
+      "impact_direction": "increases_default_risk",
+      "explanation": "This feature contributed 0.28641510009765625 toward increasing the model's predicted default risk. The contribution does not prove a policy threshold breach or establish causality."
+    },
+    {
+      "feature": "SOCIAL_DEFAULT_60_RATIO",
+      "display_name": "Social Default 60 Ratio",
+      "shap_value": 0.13541211187839508,
+      "impact_direction": "increases_default_risk",
+      "explanation": "This feature contributed 0.13541211187839508 toward increasing the model's predicted default risk. The contribution does not establish repayment-history facts, a policy breach, or causality."
+    },
+    {
+      "feature": "EXT_SOURCE_MEAN",
+      "display_name": "Ext Source Mean",
+      "shap_value": 0.1006050556898117,
+      "impact_direction": "increases_default_risk",
+      "explanation": "This feature contributed 0.1006050556898117 toward increasing the model's predicted default risk. The contribution does not prove that any policy condition was breached and is not causal."
+    }
+  ],
+  "protective_factors": [
+    {
+      "feature": "BUREAU_CREDIT_TYPE_MORTGAGE_MEAN",
+      "display_name": "Bureau Credit Type Mortgage Mean",
+      "shap_value": -0.21384058892726898,
+      "impact_direction": "reduces_default_risk",
+      "explanation": "This feature contributed -0.21384058892726898 toward reducing the model's predicted default risk. It is a model contribution rather than evidence of causality."
+    },
+    {
+      "feature": "NAME_EDUCATION_TYPE",
+      "display_name": "Name Education Type",
+      "shap_value": -0.21196292340755463,
+      "impact_direction": "reduces_default_risk",
+      "explanation": "This feature contributed -0.21196292340755463 toward reducing the model's predicted default risk. It is a model contribution rather than evidence of causality."
+    }
+  ],
+  "policy_findings": [
+    {
+      "rule_id": "MODEL_RISK_BAND",
+      "finding": "Manual review is required under this demonstration-only rule.",
+      "applicant_relevance": "The applicant is in the medium model-risk band, which requires human review under the demonstration policy.",
+      "citation": {
+        "chunk_id": "loan-policy-v1.0-section-18-chunk-001",
+        "section_number": "18",
+        "section_title": "Decision Outcomes and Manual-Review Triggers",
+        "policy_type": "synthetic_demo",
+        "page_start": 6,
+        "page_end": 7
+      }
+    },
+    {
+      "rule_id": "CREDIT_TO_INCOME",
+      "finding": "The rule status is unknown under this demonstration-only policy, and manual review is recommended.",
+      "applicant_relevance": "The reported ratio is 4.492, but verified annual income has not been confirmed. The policy threshold cannot be deterministically applied.",
+      "citation": {
+        "chunk_id": "loan-policy-v1.0-section-15-chunk-001",
+        "section_number": "15",
+        "section_title": "Affordability and Exposure Limits",
+        "policy_type": "synthetic_demo",
+        "page_start": 5,
+        "page_end": 6
+      }
+    },
+    {
+      "rule_id": "FOIR",
+      "finding": "The rule status is unknown under this demonstration-only policy, and manual review is recommended.",
+      "applicant_relevance": "FOIR is unavailable.",
+      "citation": {
+        "chunk_id": "loan-policy-v1.0-section-15-chunk-001",
+        "section_number": "15",
+        "section_title": "Affordability and Exposure Limits",
+        "policy_type": "synthetic_demo",
+        "page_start": 5,
+        "page_end": 6
+      }
+    },
+    {
+      "rule_id": "REPAYMENT_HISTORY_DPD",
+      "finding": "The rule status is unknown under this demonstration-only policy, and manual review is recommended.",
+      "applicant_relevance": "The required six-month and twelve-month DPD history is incomplete.",
+      "citation": {
+        "chunk_id": "loan-policy-v1.0-section-16-chunk-001",
+        "section_number": "16",
+        "section_title": "Credit Bureau and Repayment-History Rules",
+        "policy_type": "synthetic_demo",
+        "page_start": 6,
+        "page_end": 6
+      }
+    },
+    {
+      "rule_id": "KYC_AND_CONSENT",
+      "finding": "The rule status is unknown under this demonstration-only policy, and manual review is recommended.",
+      "applicant_relevance": "KYC verification and valid consent are not both confirmed.",
+      "citation": {
+        "chunk_id": "loan-policy-v1.0-section-19-chunk-001",
+        "section_number": "19",
+        "section_title": "Automatic Decline Conditions",
+        "policy_type": "synthetic_demo",
+        "page_start": 7,
+        "page_end": 7
+      }
+    },
+    {
+      "rule_id": "DOCUMENT_COMPLETENESS",
+      "finding": "The rule status is unknown under this demonstration-only policy, and manual review is recommended.",
+      "applicant_relevance": "Document completeness is not available.",
+      "citation": {
+        "chunk_id": "loan-policy-v1.0-section-18-chunk-001",
+        "section_number": "18",
+        "section_title": "Decision Outcomes and Manual-Review Triggers",
+        "policy_type": "synthetic_demo",
+        "page_start": 6,
+        "page_end": 7
+      }
+    }
+  ],
+  "recommendation": {
+    "recommendation": "manual_review",
+    "rationale": "Human review is required because the model risk category is medium. In addition, CREDIT_TO_INCOME, FOIR, REPAYMENT_HISTORY_DPD, KYC_AND_CONSENT, and DOCUMENT_COMPLETENESS remain unknown because required verified information is unavailable. No evaluated rule failed, and no verified hard policy condition has been established. This is decision support only and not a legally binding sanction decision.",
+    "human_review_required": true,
+    "basis": [
+      "model_risk_band",
+      "policy_rule",
+      "missing_information"
+    ]
+  },
+  "missing_information": [
+    "Verified annual income needed to deterministically evaluate the reported credit-to-income ratio",
+    "FOIR, including verified net monthly income and existing monthly debt obligations",
+    "Complete six-month and twelve-month days-past-due history",
+    "Confirmed KYC verification status",
+    "Confirmed valid customer consent",
+    "Required document completeness status"
+  ],
+  "recommended_actions": [
+    "Verify annual income and recalculate or confirm the credit-to-annual-income ratio.",
+    "Obtain verified net monthly income and existing monthly debt obligations, then calculate FOIR.",
+    "Obtain complete six-month and twelve-month days-past-due history.",
+    "Confirm KYC verification and valid customer consent.",
+    "Verify that all required documents are complete.",
+    "Route the application to an authorized human credit decision-maker for review."
+  ],
+  "limitations": [
+    "SHAP values explain feature contributions to the model prediction; they do not establish causality or independently prove that a policy threshold was breached.",
+    "All synthetic_demo policy rules cited in this report are demonstration-only rules and must not be treated as production lending policy.",
+    "This report is decision support rather than a legally binding lending decision; final sanction remains with an authorized human credit decision-maker."
+  ]
+}

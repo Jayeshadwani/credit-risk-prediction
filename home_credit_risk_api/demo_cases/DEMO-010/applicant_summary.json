@@ -1,0 +1,41 @@
+{
+  "demo_case_id": "DEMO-010",
+  "application": {
+    "contract_type": "Revolving loans",
+    "credit_amount": 202500.0,
+    "loan_annuity": 10125.0,
+    "goods_price": 202500.0
+  },
+  "financial_profile": {
+    "total_income": 67500.0,
+    "income_type": "Working",
+    "credit_income_ratio": 3.0,
+    "annuity_income_ratio": 0.15
+  },
+  "employment_profile": {
+    "occupation_type": "Laborers",
+    "organization_type": "Other",
+    "employment_years": 12.3
+  },
+  "household_profile": {
+    "family_status": "Married",
+    "housing_type": "House / apartment",
+    "children_count": 0.0,
+    "family_members": 2.0
+  },
+  "credit_indicators": {
+    "external_score_1": 0.50544554,
+    "external_score_2": 0.1470638216,
+    "external_score_3": 0.7713615894
+  },
+  "model_output": {
+    "default_probability": 0.2597679793834686,
+    "risk_category": "low"
+  },
+  "metadata": {
+    "age_years": 49.5,
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

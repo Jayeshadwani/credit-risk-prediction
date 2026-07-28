@@ -1,0 +1,60 @@
+{
+  "demo_case_id": "DEMO-016",
+  "model_output": {
+    "default_probability": 0.35809361934661865,
+    "non_default_probability": 0.6419063806533813,
+    "risk_category": "medium",
+    "model_version": "1.1.0"
+  },
+  "top_risk_factors": [
+    {
+      "feature": "INST_LATE_PAYMENT_FLAG_MEAN",
+      "display_name": "Inst Late Payment Flag Mean",
+      "raw_value": 0.200000003,
+      "model_value": 0.200000003,
+      "shap_value": 0.20596526563167572,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "INST_DAYS_ENTRY_PAYMENT_MIN",
+      "display_name": "Inst Days Entry Payment Min",
+      "raw_value": -602.0,
+      "model_value": -602.0,
+      "shap_value": 0.08528852462768555,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "PREV_PREV_APPLICATION_CREDIT_RATIO_MEAN",
+      "display_name": "Prev Prev Application Credit Ratio Mean",
+      "raw_value": 0.9029806852,
+      "model_value": 0.9029806852,
+      "shap_value": 0.06917136162519455,
+      "impact": "increases_default_risk"
+    }
+  ],
+  "top_protective_factors": [
+    {
+      "feature": "EXT_SOURCE_MEAN",
+      "display_name": "Ext Source Mean",
+      "raw_value": 0.6477969885,
+      "model_value": 0.6477969885,
+      "shap_value": -0.5511057376861572,
+      "impact": "reduces_default_risk"
+    },
+    {
+      "feature": "PREV_NAME_YIELD_GROUP_LOW_ACTION_MEAN",
+      "display_name": "Prev Name Yield Group Low Action Mean",
+      "raw_value": 1.0,
+      "model_value": 1.0,
+      "shap_value": -0.15113703906536102,
+      "impact": "reduces_default_risk"
+    }
+  ],
+  "explanation_metadata": {
+    "method": "SHAP",
+    "shap_output_scale": "raw_model_output",
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "demo_case_id": "DEMO-020",
+  "application": {
+    "contract_type": "Cash loans",
+    "credit_amount": 616261.5,
+    "loan_annuity": 26037.0,
+    "goods_price": 468000.0
+  },
+  "financial_profile": {
+    "total_income": 99000.0,
+    "income_type": "State servant",
+    "credit_income_ratio": 6.225,
+    "annuity_income_ratio": 0.263
+  },
+  "employment_profile": {
+    "occupation_type": "Core staff",
+    "organization_type": "Postal",
+    "employment_years": 5.7
+  },
+  "household_profile": {
+    "family_status": "Married",
+    "housing_type": "House / apartment",
+    "children_count": 0.0,
+    "family_members": 2.0
+  },
+  "credit_indicators": {
+    "external_score_1": 0.50544554,
+    "external_score_2": 0.0218016412,
+    "external_score_3": 0.6006575227
+  },
+  "model_output": {
+    "default_probability": 0.656264066696167,
+    "risk_category": "high"
+  },
+  "metadata": {
+    "age_years": 49.3,
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

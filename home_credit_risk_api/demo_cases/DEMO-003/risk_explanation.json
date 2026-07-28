@@ -1,0 +1,60 @@
+{
+  "demo_case_id": "DEMO-003",
+  "model_output": {
+    "default_probability": 0.22735105454921722,
+    "non_default_probability": 0.7726489454507828,
+    "risk_category": "low",
+    "model_version": "1.1.0"
+  },
+  "top_risk_factors": [
+    {
+      "feature": "BUREAU_BUREAU_DEBT_CREDIT_RATIO_MAX",
+      "display_name": "Bureau Bureau Debt Credit Ratio Max",
+      "raw_value": 1.0,
+      "model_value": 1.0,
+      "shap_value": 0.16172993183135986,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "CREDIT_GOODS_RATIO",
+      "display_name": "Credit Goods Ratio",
+      "raw_value": 1.1979999542,
+      "model_value": 1.1979999542,
+      "shap_value": 0.08752349019050598,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "NAME_EDUCATION_TYPE",
+      "display_name": "Name Education Type",
+      "raw_value": "Secondary / secondary special",
+      "model_value": 4.0,
+      "shap_value": 0.07259520888328552,
+      "impact": "increases_default_risk"
+    }
+  ],
+  "top_protective_factors": [
+    {
+      "feature": "INST_LATE_PAYMENT_FLAG_MEAN",
+      "display_name": "Inst Late Payment Flag Mean",
+      "raw_value": 0.0,
+      "model_value": 0.0,
+      "shap_value": -0.11808261275291443,
+      "impact": "reduces_default_risk"
+    },
+    {
+      "feature": "EXT_SOURCE_MEAN",
+      "display_name": "Ext Source Mean",
+      "raw_value": 0.4921458066,
+      "model_value": 0.4921458066,
+      "shap_value": -0.1179235577583313,
+      "impact": "reduces_default_risk"
+    }
+  ],
+  "explanation_metadata": {
+    "method": "SHAP",
+    "shap_output_scale": "raw_model_output",
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

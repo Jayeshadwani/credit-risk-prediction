@@ -1,0 +1,60 @@
+{
+  "demo_case_id": "DEMO-012",
+  "model_output": {
+    "default_probability": 0.6665070652961731,
+    "non_default_probability": 0.3334929347038269,
+    "risk_category": "high",
+    "model_version": "1.1.0"
+  },
+  "top_risk_factors": [
+    {
+      "feature": "INST_AMT_PAYMENT_SUM",
+      "display_name": "Inst Amt Payment Sum",
+      "raw_value": 64977.12,
+      "model_value": 64977.12,
+      "shap_value": 0.12730832397937775,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "INST_LATE_PAYMENT_FLAG_MEAN",
+      "display_name": "Inst Late Payment Flag Mean",
+      "raw_value": 0.1111111119,
+      "model_value": 0.1111111119,
+      "shap_value": 0.11263326555490494,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "BUREAU_BUREAU_DEBT_CREDIT_RATIO_MAX",
+      "display_name": "Bureau Bureau Debt Credit Ratio Max",
+      "raw_value": 0.9653996825,
+      "model_value": 0.9653996825,
+      "shap_value": 0.09266243129968643,
+      "impact": "increases_default_risk"
+    }
+  ],
+  "top_protective_factors": [
+    {
+      "feature": "DAYS_BIRTH",
+      "display_name": "Applicant age",
+      "raw_value": -8186.0,
+      "model_value": -8186.0,
+      "shap_value": -0.11221006512641907,
+      "impact": "reduces_default_risk"
+    },
+    {
+      "feature": "CREDIT_GOODS_RATIO",
+      "display_name": "Credit Goods Ratio",
+      "raw_value": 1.0659999847,
+      "model_value": 1.0659999847,
+      "shap_value": -0.08600197732448578,
+      "impact": "reduces_default_risk"
+    }
+  ],
+  "explanation_metadata": {
+    "method": "SHAP",
+    "shap_output_scale": "raw_model_output",
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}

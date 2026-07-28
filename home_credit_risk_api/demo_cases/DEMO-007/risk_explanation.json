@@ -1,0 +1,60 @@
+{
+  "demo_case_id": "DEMO-007",
+  "model_output": {
+    "default_probability": 0.4403323233127594,
+    "non_default_probability": 0.5596676766872406,
+    "risk_category": "medium",
+    "model_version": "1.1.0"
+  },
+  "top_risk_factors": [
+    {
+      "feature": "INST_LATE_PAYMENT_FLAG_MEAN",
+      "display_name": "Inst Late Payment Flag Mean",
+      "raw_value": 0.3125,
+      "model_value": 0.3125,
+      "shap_value": 0.25199994444847107,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "INST_AMT_PAYMENT_SUM",
+      "display_name": "Inst Amt Payment Sum",
+      "raw_value": 78908.49,
+      "model_value": 78908.49,
+      "shap_value": 0.13758787512779236,
+      "impact": "increases_default_risk"
+    },
+    {
+      "feature": "AMT_ANNUITY",
+      "display_name": "Loan annuity amount",
+      "raw_value": 33165.0,
+      "model_value": 33165.0,
+      "shap_value": 0.11281963437795639,
+      "impact": "increases_default_risk"
+    }
+  ],
+  "top_protective_factors": [
+    {
+      "feature": "EXT_SOURCE_MEAN",
+      "display_name": "Ext Source Mean",
+      "raw_value": 0.6560832262,
+      "model_value": 0.6560832262,
+      "shap_value": -0.5339556932449341,
+      "impact": "reduces_default_risk"
+    },
+    {
+      "feature": "CREDIT_GOODS_RATIO",
+      "display_name": "Credit Goods Ratio",
+      "raw_value": 1.0,
+      "model_value": 1.0,
+      "shap_value": -0.1285763531923294,
+      "impact": "reduces_default_risk"
+    }
+  ],
+  "explanation_metadata": {
+    "method": "SHAP",
+    "shap_output_scale": "raw_model_output",
+    "sensitive_features_excluded": [
+      "CODE_GENDER"
+    ]
+  }
+}
