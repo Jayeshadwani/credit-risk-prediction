@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any,Literal
 
 from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
@@ -14,12 +14,25 @@ from app.report_generator import (
 from app.report_schemas import UnderwritingReport
 from app.config import settings
 from app.policy_retriever import collection
+from langgraph.types import Command
+from app.agent.graph import underwriting_graph
 
 app = FastAPI(
     title="Loan Underwriting Assistant API",
     version="1.0.0",
 )
 
+class HumanReviewRequest(BaseModel):
+    decision: Literal[
+        "approve",
+        "decline",
+        "request_more_information",
+    ]
+
+    comment: str | None = Field(
+        default=None,
+        max_length=1000,
+    )
 
 class PredictionRequest(BaseModel):
     records: list[dict[str, Any]] = Field(
@@ -193,4 +206,99 @@ def generate_report(
         raise HTTPException(
             status_code=500,
             detail="Unexpected internal server error.",
+        ) from error
+
+
+def build_underwriting_config(case_id: str) -> dict[str, Any]:
+    """
+    Creates a stable LangGraph thread configuration so the same underwriting case can be resumed later.
+    """
+
+    return {
+        "configurable": {
+            "thread_id": f"underwriting-{case_id}",
+        }
+    }
+
+
+@app.post("/underwriting/{case_id}/start")
+def start_underwriting(case_id: str) -> dict[str, Any]:
+    """
+    Starts the underwriting workflow and returns either an automatic result or a pending human-review request.
+    """
+
+    config = build_underwriting_config(case_id)
+
+    try:
+        result = underwriting_graph.invoke(
+            {
+                "case_id": case_id,
+            },
+            config=config,
+        )
+
+        interrupts = result.get("__interrupt__",[])
+
+        if interrupts:
+            return {
+                "case_id": case_id,
+                "status": "awaiting_human_review",
+                "recommendation": result["recommendation"],
+                "review_request": interrupts[0].value,
+            }
+
+        return {
+            "case_id": case_id,
+            "status": result["decision_status"],
+            "recommendation": result["recommendation"],
+            "human_review_required": result[
+                "human_review_required"
+            ],
+        }
+
+    except FileNotFoundError as error:
+        raise HTTPException(
+            status_code=404,
+            detail=str(error),
+        ) from error
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+
+@app.post("/underwriting/{case_id}/review")
+def review_underwriting(case_id: str,request: HumanReviewRequest) -> dict[str, Any]:
+    """
+    Resumes a paused underwriting case using the decision submitted by a human underwriter.
+    """
+
+    config = build_underwriting_config(case_id)
+
+    try:
+        result = underwriting_graph.invoke(
+            Command(
+                resume={
+                    "decision": request.decision,
+                    "comment": request.comment,
+                }
+            ),
+            config=config,
+        )
+
+        return {
+            "case_id": case_id,
+            "recommendation": result["recommendation"],
+            "human_decision": result["human_decision"],
+            "human_comment": result["human_comment"],
+            "status": result["decision_status"],
+        }
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
         ) from error
