@@ -1,0 +1,115 @@
+flowchart TD
+    as_bool["as_bool"]
+    as_float["as_float"]
+    build_factor["build_factor"]
+    build_report_input["build_report_input"]
+    build_underwriting_config["build_underwriting_config"]
+    evaluate_credit_to_income["evaluate_credit_to_income"]
+    evaluate_document_completeness["evaluate_document_completeness"]
+    evaluate_foir["evaluate_foir"]
+    evaluate_kyc_and_consent["evaluate_kyc_and_consent"]
+    evaluate_model_risk_band["evaluate_model_risk_band"]
+    evaluate_policy_rules["evaluate_policy_rules"]
+    evaluate_repayment_history["evaluate_repayment_history"]
+    explain_predictions["explain_predictions"]
+    find_sensitive_keys["find_sensitive_keys"]
+    find_value["find_value"]
+    generate_final_report["generate_final_report"]
+    generate_final_report_from_input["generate_final_report_from_input"]
+    generate_report["generate_report"]
+    generate_report_from_input["generate_report_from_input"]
+    generate_underwriting_report["generate_underwriting_report"]
+    get_audit_connection["get_audit_connection"]
+    get_case_audit["get_case_audit"]
+    get_feature_display_name["get_feature_display_name"]
+    get_refusal_message["get_refusal_message"]
+    get_review_audit["get_review_audit"]
+    get_risk_category["get_risk_category"]
+    get_underwriting_audit["get_underwriting_audit"]
+    get_underwriting_review_audit["get_underwriting_review_audit"]
+    initialize_audit_db["initialize_audit_db"]
+    load_json["load_json"]
+    log_audit_event["log_audit_event"]
+    make_json_safe["make_json_safe"]
+    mark_for_human_review["mark_for_human_review"]
+    normalize_factor["normalize_factor"]
+    normalize_policy_chunk["normalize_policy_chunk"]
+    predict["predict"]
+    predict_default_probability["predict_default_probability"]
+    prepare_case["prepare_case"]
+    prepare_features["prepare_features"]
+    redact_pii["redact_pii"]
+    redact_text["redact_text"]
+    remove_sensitive_explanation_factors["remove_sensitive_explanation_factors"]
+    remove_sensitive_fields["remove_sensitive_fields"]
+    retrieve_policy_chunks["retrieve_policy_chunks"]
+    review_underwriting["review_underwriting"]
+    start_underwriting["start_underwriting"]
+    summarize_policy_evaluations["summarize_policy_evaluations"]
+    validate_case_id["validate_case_id"]
+    validate_factor_group["validate_factor_group"]
+    validate_limitations["validate_limitations"]
+    validate_policy_citations["validate_policy_citations"]
+    validate_report_grounding["validate_report_grounding"]
+
+    build_factor --> get_feature_display_name
+    build_factor --> make_json_safe
+    build_report_input --> evaluate_policy_rules
+    build_report_input --> find_sensitive_keys
+    build_report_input --> load_json
+    build_report_input --> normalize_factor
+    build_report_input --> normalize_policy_chunk
+    build_report_input --> remove_sensitive_explanation_factors
+    build_report_input --> remove_sensitive_fields
+    build_report_input --> validate_case_id
+    evaluate_credit_to_income --> as_bool
+    evaluate_credit_to_income --> as_float
+    evaluate_credit_to_income --> find_value
+    evaluate_document_completeness --> as_bool
+    evaluate_document_completeness --> find_value
+    evaluate_foir --> as_bool
+    evaluate_foir --> as_float
+    evaluate_foir --> find_value
+    evaluate_kyc_and_consent --> as_bool
+    evaluate_kyc_and_consent --> find_value
+    evaluate_policy_rules --> evaluate_credit_to_income
+    evaluate_policy_rules --> evaluate_document_completeness
+    evaluate_policy_rules --> evaluate_foir
+    evaluate_policy_rules --> evaluate_kyc_and_consent
+    evaluate_policy_rules --> evaluate_model_risk_band
+    evaluate_policy_rules --> evaluate_repayment_history
+    evaluate_policy_rules --> summarize_policy_evaluations
+    evaluate_repayment_history --> as_float
+    evaluate_repayment_history --> find_value
+    explain_predictions --> build_factor
+    generate_final_report --> generate_final_report_from_input
+    generate_final_report_from_input --> generate_report_from_input
+    generate_report --> generate_underwriting_report
+    generate_report_from_input --> get_refusal_message
+    generate_report_from_input --> validate_report_grounding
+    generate_underwriting_report --> build_report_input
+    generate_underwriting_report --> generate_report_from_input
+    get_case_audit --> get_audit_connection
+    get_case_audit --> initialize_audit_db
+    get_review_audit --> get_audit_connection
+    get_review_audit --> initialize_audit_db
+    get_underwriting_audit --> get_case_audit
+    get_underwriting_review_audit --> get_review_audit
+    initialize_audit_db --> get_audit_connection
+    log_audit_event --> get_audit_connection
+    log_audit_event --> initialize_audit_db
+    mark_for_human_review --> log_audit_event
+    predict --> predict_default_probability
+    predict_default_probability --> explain_predictions
+    predict_default_probability --> get_risk_category
+    predict_default_probability --> prepare_features
+    prepare_case --> build_report_input
+    prepare_case --> log_audit_event
+    redact_pii --> redact_text
+    remove_sensitive_explanation_factors --> remove_sensitive_fields
+    retrieve_policy_chunks --> predict
+    review_underwriting --> build_underwriting_config
+    start_underwriting --> build_underwriting_config
+    validate_report_grounding --> validate_factor_group
+    validate_report_grounding --> validate_limitations
+    validate_report_grounding --> validate_policy_citations

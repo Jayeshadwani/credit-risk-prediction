@@ -53,6 +53,35 @@ collection = chroma_client.get_collection(
 from typing import Any
 
 
+from typing import Any
+
+from langsmith import traceable
+
+
+def format_policy_trace(
+    evidence: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """
+    Converts retrieved policy chunks into LangSmith's document representation for RAG trace inspection.
+    """
+    return [
+        {
+            "page_content": item["text"],
+            "type": "Document",
+            "metadata": {
+                "chunk_id": item["chunk_id"],
+                "section_number": item["section_number"],
+                "section_title": item["section_title"],
+                "policy_type": item["policy_type"],
+                "page_start": item["page_start"],
+                "page_end": item["page_end"],
+                "fusion_score": item.get("fusion_score"),
+                "reranker_score": item.get("reranker_score"),
+            },
+        }
+        for item in evidence
+    ]
+
 def create_protective_factor_query(
     factor: dict[str, Any],
 ) -> str:
@@ -187,6 +216,12 @@ def create_protective_factor_query(
         f"default risk?"
     )
 
+
+@traceable(
+    name="policy_retrieval",
+    run_type="retriever",
+    process_outputs=format_policy_trace,
+)
 def retrieve_policy_chunks(
     query: str,
     top_k: int = 3,

@@ -5,11 +5,13 @@ from pathlib import Path
 from typing import Any
 
 from openai import OpenAI
-
+from langsmith.wrappers import wrap_openai
 from app.report_input import build_report_input
 from app.report_schemas import (
     ModelFactor,
     UnderwritingReport,
+    FinalUnderwritingReport,
+    HumanReviewOutcome,
 )
 
 from app.config import settings
@@ -446,20 +448,17 @@ def validate_report_grounding(
     validate_limitations(report.limitations)
 
 
-def generate_underwriting_report(
-    case_id: str,
-    model_name: str | None = None,
-    save_output: bool = True,
-) -> UnderwritingReport:
-    report_input = build_report_input(
-        case_id=case_id,
-        save_output=False,
-    )
+def generate_report_from_input(report_input: dict[str, Any], model_name: str | None = None) -> UnderwritingReport:
+    """
+    Generates and validates an underwriting report from an already-prepared and policy-evaluated case input.
+    """
 
-    client = OpenAI(
-        api_key=settings.openai_api_key,
-        timeout=settings.openai_timeout_seconds,
-        max_retries=settings.openai_max_retries,
+    client = wrap_openai(
+        OpenAI(
+            api_key=settings.openai_api_key,
+            timeout=settings.openai_timeout_seconds,
+            max_retries=settings.openai_max_retries,
+        )
     )
 
     response = client.responses.parse(
@@ -490,7 +489,7 @@ def generate_underwriting_report(
 
     if refusal_message:
         raise RuntimeError(
-            f"Model refused report generation: "
+            "Model refused report generation: "
             f"{refusal_message}"
         )
 
@@ -526,6 +525,24 @@ def generate_underwriting_report(
         report_input,
     )
 
+    return report
+
+
+def generate_underwriting_report(case_id: str, model_name: str | None = None, save_output: bool = True) -> UnderwritingReport:
+    """
+    Builds the case input and generates the existing standalone underwriting decision-support report.
+    """
+
+    report_input = build_report_input(
+        case_id=case_id,
+        save_output=False,
+    )
+
+    report = generate_report_from_input(
+        report_input=report_input,
+        model_name=model_name,
+    )
+
     if save_output:
         output_path = (
             DEMO_CASES_DIR
@@ -533,10 +550,7 @@ def generate_underwriting_report(
             / "underwriting_report.json"
         )
 
-        with output_path.open(
-            "w",
-            encoding="utf-8",
-        ) as file:
+        with output_path.open("w", encoding="utf-8") as file:
             json.dump(
                 report.model_dump(mode="json"),
                 file,
@@ -548,3 +562,31 @@ def generate_underwriting_report(
         print(f"Saved report: {output_path}")
 
     return report
+
+def generate_final_report_from_input(
+    report_input: dict[str, Any],
+    human_decision: str,
+    human_comment: str | None,
+    decision_status: str,
+    model_name: str | None = None,
+) -> FinalUnderwritingReport:
+    """
+    Generates the grounded underwriting analysis and
+    attaches the authoritative human-review outcome.
+    """
+
+    report = generate_report_from_input(
+        report_input=report_input,
+        model_name=model_name,
+    )
+
+    human_review_outcome = HumanReviewOutcome(
+        decision=human_decision,
+        comment=human_comment,
+        status=decision_status,
+    )
+
+    return FinalUnderwritingReport(
+        **report.model_dump(),
+        human_review_outcome=human_review_outcome,
+    )

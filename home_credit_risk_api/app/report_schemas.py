@@ -30,6 +30,11 @@ PolicyRuleId = Literal[
     "DOCUMENT_COMPLETENESS",
 ]
 
+HumanDecision = Literal[
+    "approve",
+    "decline",
+    "request_more_information",
+]
 
 class StrictBaseModel(BaseModel):
     model_config = ConfigDict(
@@ -37,6 +42,15 @@ class StrictBaseModel(BaseModel):
         str_strip_whitespace=True,
     )
 
+
+class HumanReviewOutcome(StrictBaseModel):
+    decision: HumanDecision
+    comment: str | None = None
+
+    status: Literal[
+        "completed",
+        "awaiting_more_information",
+    ]
 
 class ModelAssessment(StrictBaseModel):
     default_probability: float = Field(
@@ -146,4 +160,12 @@ class UnderwritingReport(StrictBaseModel):
             "than causality, synthetic policy rules are demonstration-only, "
             "and final sanction remains with an authorized human."
         )
-    )
+    ) 
+
+
+class FinalUnderwritingReport(UnderwritingReport):
+    """
+    Extends the generated underwriting report with the final human-review outcome.
+    """
+
+    human_review_outcome: HumanReviewOutcome
